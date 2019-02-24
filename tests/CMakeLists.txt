@@ -1,13 +1,9 @@
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 find_package(Threads REQUIRED)
+find_package(check REQUIRED)
+find_package(subunit REQUIRED)
 
-
-add_library(check STATIC IMPORTED )
-
-set_target_properties(check
-    PROPERTIES
-    IMPORTED_LOCATION "/usr/local/lib/libcheck.a"
-    INTERFACE_INCLUDE_DIRECTORIES "/usr/local/include"
-)
+message("")
 
 include_directories(${PROJECT_SOURCE_DIR})
 
@@ -27,6 +23,7 @@ foreach(mropes_test_file ${mropes_test_files})
 
     target_link_libraries(${mropes_test_name}
         check
+        subunit
         m rt
         ${CMAKE_THREAD_LIBS_INIT}
         mropes

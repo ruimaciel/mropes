@@ -34,6 +34,8 @@ install(TARGETS ${PROJECT_NAME}
     PUBLIC_HEADER DESTINATION include/${PROJECT_NAME}
     )
 
-enable_testing()
-
-add_subdirectory(tests)
+option(ENABLE_TESTS "Enable tests" ON)
+if (${ENABLE_TESTS})
+    enable_testing()
+    add_subdirectory(tests)
+endif()

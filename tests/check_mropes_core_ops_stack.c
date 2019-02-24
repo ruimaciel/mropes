@@ -10,7 +10,7 @@ START_TEST(test_rope_stack_init)
 
 	mrope_stack_init(&stack);
 
-	ck_assert_ptr_nonnull(stack.data);
+	ck_assert_ptr_ne(stack.data, NULL);
 	ck_assert_uint_gt(stack.size, 0);
 }
 END_TEST
@@ -38,7 +38,7 @@ START_TEST(test_rope_stack_push)
 	mrope_stack_init(&stack);
 
 	struct mrope_node *node = (struct mrope_node *)mrope_make_leaf_node();
-	ck_assert_ptr_nonnull(node);
+	ck_assert_ptr_ne(node, NULL);
 
 	enum mrope_error_code error = MROPE_OK;
 
@@ -58,7 +58,7 @@ START_TEST(test_rope_stack_pop)
 
 	struct mrope_node *node = NULL;
 	node = (struct mrope_node *)mrope_make_leaf_node();
-	ck_assert_ptr_nonnull(node);
+	ck_assert_ptr_ne(node, NULL);
 	enum mrope_error_code error = MROPE_OK;
 
 	error = mrope_stack_push(&stack, node);
@@ -78,14 +78,14 @@ START_TEST(test_rope_stack_top)
 	mrope_stack_init(&stack);
 
 	struct mrope_node *node = (struct mrope_node *)mrope_make_leaf_node();
-	ck_assert_ptr_nonnull(node);
+	ck_assert_ptr_ne(node, NULL);
 
 	enum mrope_error_code error = MROPE_OK;
 
 	struct mrope_node *top_node = NULL;
 
 	top_node = mrope_stack_top(&stack);
-	ck_assert_ptr_null(top_node);
+	ck_assert_ptr_eq(top_node, NULL);
 
 	error = mrope_stack_push(&stack, node);
 	ck_assert_int_eq(error, MROPE_OK);

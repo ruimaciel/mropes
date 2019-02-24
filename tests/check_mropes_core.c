@@ -9,7 +9,7 @@ START_TEST(test_rope_init)
 	mrope_t rope;
 	mrope_init(&rope);
 
-	ck_assert_ptr_null(rope.root_node);
+	ck_assert_ptr_eq(rope.root_node, NULL);
 }
 END_TEST
 
@@ -24,7 +24,7 @@ START_TEST(test_rope_when_prepend_rope_then_lhs_is_null)
 
 	mrope_prepend_rope(&rope_rhs, &rope_lhs);
 
-	ck_assert_ptr_null(rope_lhs.root_node);
+	ck_assert_ptr_eq(rope_lhs.root_node, NULL);
 }
 END_TEST
 
@@ -41,7 +41,7 @@ START_TEST(test_rope_prepend_rope)
 
 	mrope_prepend_rope(&rope_lhs, &rope_rhs);
 
-	ck_assert_ptr_nonnull(rope_lhs.root_node);
+	ck_assert_ptr_ne(rope_lhs.root_node, NULL);
 }
 END_TEST
 
@@ -53,7 +53,7 @@ START_TEST(test_rope_append_text)
 
 	mrope_append_text(&rope, strdup("foo"));
 
-	ck_assert_ptr_nonnull(rope.root_node);
+	ck_assert_ptr_ne(rope.root_node, NULL);
 }
 END_TEST
 
@@ -68,7 +68,7 @@ START_TEST(test_rope_append_rope)
 
 	mrope_append_rope(&rope, &rope2);
 
-	ck_assert_ptr_null(rope.root_node);
+	ck_assert_ptr_eq(rope.root_node, NULL);
 }
 END_TEST
 
@@ -213,7 +213,7 @@ START_TEST(test_rope_free)
 
 	mrope_free(&rope);
 
-	ck_assert_ptr_null(rope.root_node);
+	ck_assert_ptr_eq(rope.root_node, NULL);
 }
 END_TEST
 

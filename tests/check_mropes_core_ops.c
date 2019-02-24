@@ -37,7 +37,7 @@ START_TEST(test_Given_null_lhs_and_nonnull_rhs_When_make_branch_node_Then_rhs_is
 
 	struct mrope_branch_node *node = mrope_make_branch_node((struct mrope_node *)lhs, (struct mrope_node *)rhs);
 
-	ck_assert_ptr_null(node->right);
+	ck_assert_ptr_eq(node->right, NULL);
 }
 END_TEST
 
@@ -45,9 +45,9 @@ START_TEST(test_rope_make_leaf_node)
 {
 	struct mrope_leaf_node *node = mrope_make_leaf_node();
 
-	ck_assert_ptr_nonnull(node);
+	ck_assert_ptr_ne(node, NULL);
 	ck_assert_int_eq(node->node.type, MROPE_NODE_LEAF);
-	ck_assert_ptr_null(node->text);
+	ck_assert_ptr_eq(node->text, NULL);
 }
 END_TEST
 
@@ -61,9 +61,9 @@ START_TEST(test_rope_make_leaf_node_from_text)
 	error = mrope_make_leaf_node_from_text(&leaf_node, text);
 
 	ck_assert_int_eq(error, MROPE_OK);
-	ck_assert_ptr_nonnull(leaf_node);
+	ck_assert_ptr_ne(leaf_node, NULL);
 	ck_assert_int_eq(leaf_node->node.type, MROPE_NODE_LEAF);
-	ck_assert_ptr_nonnull(leaf_node->text);
+	ck_assert_ptr_ne(leaf_node->text, NULL);
 }
 END_TEST
 
