@@ -1,6 +1,6 @@
 # M's ropes library 
 
-[![Build status](https://travis-ci.com/ruimaciel/mropes.svg?branch=develop)](https://travis-ci.org/azu/travis-badge)
+![Travis (.com) branch](https://img.shields.io/travis/com/ruimaciel/mropes/develop.svg)
 ![License](https://img.shields.io/github/license/ruimaciel/mropes.svg)
 ![Language](https://img.shields.io/github/languages/top/ruimaciel/mropes.svg)
 ![Code size](https://img.shields.io/github/languages/code-size/ruimaciel/mropes.svg)
