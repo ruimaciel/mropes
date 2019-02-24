@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <check.h>
 
-#include <mropes/rope_ops.h>
+#include "src/rope_ops.h"
 
 START_TEST(test_rope_make_branch_node_Shall_return_node_branch)
 {

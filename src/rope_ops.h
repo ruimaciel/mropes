@@ -1,7 +1,7 @@
 #ifndef MROPES_OPS_H
 #define MROPES_OPS_H
 
-#include "rope.h"
+#include <mropes/rope.h>
 
 void mrope_init_branch_node(struct mrope_branch_node *node, struct mrope_node *lhs, struct mrope_node *rhs);
 void mrope_init_leaf_node(struct mrope_leaf_node * node, char * text, const size_t length);

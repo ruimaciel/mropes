@@ -6,21 +6,33 @@ project(mropes
     )
 
 set(mropes_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/mropes/rope.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/mropes/rope_ops.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/mropes/rope_stack.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/rope.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/rope_ops.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/rope_stack.c
+    )
+
+set(mropes_INCLUDES
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/mropes/rope.h
     )
 
 set(mropes_HEADERS
-    ${CMAKE_CURRENT_SOURCE_DIR}/mropes/rope.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/mropes/rope_ops.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/mropes/rope_stack.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/rope_ops.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/rope_stack.h
     )
 
 add_library(${PROJECT_NAME} SHARED
     ${mropes_SOURCES}
+    ${mropes_INCLUDES}
     ${mropes_HEADERS}
     )
+
+target_include_directories(${PROJECT_NAME}
+    PUBLIC
+        $<INSTALL_INTERFACE:include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
 
 set_target_properties(
     ${PROJECT_NAME} PROPERTIES

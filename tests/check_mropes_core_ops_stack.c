@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <check.h>
 
-#include <mropes/rope_ops.h>
-#include <mropes/rope_stack.h>
+#include "src/rope_ops.h"
+#include "src/rope_stack.h"
 
 START_TEST(test_rope_stack_init)
 {

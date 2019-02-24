@@ -1,7 +1,7 @@
 #ifndef MROPES_STACK_H
 #define MROPES_STACK_H
 
-#include "rope.h"
+#include <mropes/rope.h>
 
 struct mrope_stack
 {
