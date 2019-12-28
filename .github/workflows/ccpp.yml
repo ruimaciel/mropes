@@ -11,6 +11,8 @@ jobs:
     - uses: actions/checkout@v1
     - name: install dependencies
       run: sudo apt-get install check
+    - name: create build directory
+      run: mkdir build
     - name: configure
       run: cmake .
       working-directory: ./build
