@@ -13,7 +13,10 @@ jobs:
       run: sudo apt-get install check
     - name: configure
       run: cmake .
+      working-directory: ./build
     - name: make
       run: make
+      working-directory: ./build
     - name: make test
       run: make test
+      working-directory: ./build
