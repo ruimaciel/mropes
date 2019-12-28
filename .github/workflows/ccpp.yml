@@ -19,6 +19,10 @@ jobs:
     - name: make
       run: make
       working-directory: ./build
+    - uses: actions/upload-artifact@v1
+      with:
+        name: build
+        path: build
     - name: make test
       run: make test
       working-directory: ./build
