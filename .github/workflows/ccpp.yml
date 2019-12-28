@@ -38,6 +38,9 @@ jobs:
     - name: configure
       run: cmake .. -DENABLE_TESTS=ON
       working-directory: ./build
+    - name: make
+      run: make
+      working-directory: ./build
     - name: make test
       run: make test
       working-directory: ./build
