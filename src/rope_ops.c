@@ -34,7 +34,7 @@ struct mrope_branch_node *mrope_make_branch_node(struct mrope_node *lhs, struct 
 	if( (node = (struct mrope_branch_node *)malloc(sizeof(struct mrope_branch_node))) == NULL)
 	{
 		return NULL;
-	};
+	}
 
 	/* avoid having a null LHS  with a non-null RHS */
 	if(lhs == NULL) {
@@ -54,7 +54,7 @@ struct mrope_leaf_node * mrope_make_leaf_node()
 	if( (node = (struct mrope_leaf_node *)malloc(sizeof(struct mrope_leaf_node))) == NULL)
 	{
 		return NULL;
-	};
+	}
 
 	mrope_init_leaf_node(node, NULL, 0);
 

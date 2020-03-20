@@ -36,7 +36,7 @@ enum mrope_error_code
 	MROPE_OK = 0,
 	MROPE_MALLOC_FAILED,
 	MROPE_UNKNOWN_NODE_TYPE,
-	MROPE_OUT_OF_RANGE,
+	MROPE_OUT_OF_RANGE
 };
 
 typedef enum mrope_error_code mreturn_t;
