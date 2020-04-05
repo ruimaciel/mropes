@@ -20,6 +20,8 @@ set(mropes_HEADERS
     src/rope_stack.h
     )
 
+configure_file(src/version.h.in include/mropes/version.h)
+
 add_library(${PROJECT_NAME} SHARED
     ${mropes_SOURCES}
     ${mropes_INCLUDES}
@@ -47,6 +49,11 @@ install(TARGETS ${PROJECT_NAME}
     LIBRARY DESTINATION lib/${PROJECT_NAME}
     PUBLIC_HEADER DESTINATION include/${PROJECT_NAME}
     )
+
+install(FILES
+  ${CMAKE_CURRENT_BINARY_DIR}/include/mropes/version.h
+  DESTINATION include/${PROJECT_NAME}
+  )
 
 install(
     EXPORT ${PROJECT_NAME}
