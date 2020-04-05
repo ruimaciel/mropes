@@ -43,8 +43,14 @@ set_target_properties(
     )
 
 install(TARGETS ${PROJECT_NAME}
+    EXPORT ${PROJECT_NAME}
     LIBRARY DESTINATION lib/${PROJECT_NAME}
     PUBLIC_HEADER DESTINATION include/${PROJECT_NAME}
+    )
+
+install(
+    EXPORT ${PROJECT_NAME}
+    DESTINATION lib/cmake/${PROJECT_NAME}
     )
 
 option(ENABLE_TESTS "Enable tests" ON)
