@@ -1,24 +1,26 @@
 cmake_minimum_required(VERSION 3.1)
 
 project(mropes
-    VERSION 0.0.3.0
+    VERSION 0.0.4.0
     LANGUAGES C
     )
 
 set(mropes_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/rope.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/rope_ops.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/rope_stack.c
+    src/rope.c
+    src/rope_ops.c
+    src/rope_stack.c
     )
 
 set(mropes_INCLUDES
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/mropes/rope.h
+    include/mropes/rope.h
     )
 
 set(mropes_HEADERS
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/rope_ops.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/rope_stack.h
+    src/rope_ops.h
+    src/rope_stack.h
     )
+
+configure_file(src/version.h.in include/mropes/version.h)
 
 add_library(${PROJECT_NAME} SHARED
     ${mropes_SOURCES}
@@ -39,11 +41,23 @@ set_target_properties(
     C_STANDARD 90
     C_STANDARD_REQUIRED ON
     C_EXTENSIONS OFF
+    PUBLIC_HEADER ${mropes_INCLUDES}
     )
 
 install(TARGETS ${PROJECT_NAME}
+    EXPORT ${PROJECT_NAME}
     LIBRARY DESTINATION lib/${PROJECT_NAME}
     PUBLIC_HEADER DESTINATION include/${PROJECT_NAME}
+    )
+
+install(FILES
+  ${CMAKE_CURRENT_BINARY_DIR}/include/mropes/version.h
+  DESTINATION include/${PROJECT_NAME}
+  )
+
+install(
+    EXPORT ${PROJECT_NAME}
+    DESTINATION lib/cmake/${PROJECT_NAME}
     )
 
 option(ENABLE_TESTS "Enable tests" ON)
