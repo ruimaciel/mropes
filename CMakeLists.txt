@@ -39,11 +39,18 @@ set_target_properties(
     C_STANDARD 90
     C_STANDARD_REQUIRED ON
     C_EXTENSIONS OFF
+    PUBLIC_HEADER ${mropes_INCLUDES}
     )
 
 install(TARGETS ${PROJECT_NAME}
+    EXPORT ${PROJECT_NAME}
     LIBRARY DESTINATION lib/${PROJECT_NAME}
     PUBLIC_HEADER DESTINATION include/${PROJECT_NAME}
+    )
+
+install(
+    EXPORT ${PROJECT_NAME}
+    DESTINATION lib/cmake/${PROJECT_NAME}
     )
 
 option(ENABLE_TESTS "Enable tests" ON)
