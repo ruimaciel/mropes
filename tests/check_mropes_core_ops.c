@@ -271,6 +271,7 @@ Suite * mropes_suite(void)
 	tcase_add_test(tc_core, test_mrope_split_leaf_node_Shall_return_lhs_with_index_length);
 	tcase_add_test(tc_core, test_mrope_split_leaf_node_Shall_return_rhs_with_index_length);
 	tcase_add_test(tc_core, test_mrope_split_leaf_node_Shall_return_rhs_with_first_index);
+	tcase_add_test(tc_core, test_rope_index_branch_node);
 	tcase_add_test(tc_core, test_rope_make_leaf_node);
 	tcase_add_test(tc_core, test_rope_make_leaf_node_from_text);
 	tcase_add_test(tc_core, test_rope_make_leaf_node_from_text_SHALL_own_text);
