@@ -47,7 +47,7 @@ struct mrope_branch_node *mrope_make_branch_node(struct mrope_node *lhs, struct 
 	return node;
 }
 
-struct mrope_leaf_node * mrope_make_leaf_node()
+struct mrope_leaf_node * mrope_make_leaf_node(void)
 {
 	struct mrope_leaf_node * node = NULL;
 
@@ -248,7 +248,7 @@ char mrope_index_branch_node(struct mrope_branch_node *branch_node, const size_t
 	}
 
 	if(index < lhs_weight + branch_node->right->weight) {
-		return mrope_index_node( (struct mrope_node *) branch_node->right, lhs_weight + index);
+		return mrope_index_node( (struct mrope_node *) branch_node->right, index - lhs_weight );
 	}
 
 	return '\0';

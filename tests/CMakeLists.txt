@@ -3,7 +3,6 @@ find_package(Threads REQUIRED)
 find_package(check REQUIRED)
 find_package(subunit REQUIRED)
 
-message("")
 
 include_directories(${PROJECT_SOURCE_DIR})
 
