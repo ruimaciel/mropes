@@ -269,6 +269,7 @@ Suite * mropes_suite(void)
 	tcase_add_test(tc_core, test_Given_null_lhs_and_nonnull_rhs_When_make_branch_node_Then_input_rhs_is_set_as_output_lhs);
 	tcase_add_test(tc_core, test_Given_null_lhs_and_nonnull_rhs_When_make_branch_node_Then_rhs_is_null);
 	tcase_add_test(tc_core, test_mrope_split_leaf_node_Shall_return_lhs_with_index_length);
+	tcase_add_test(tc_core, test_mrope_split_leaf_node_Shall_return_rhs_with_index_length);
 	tcase_add_test(tc_core, test_mrope_split_leaf_node_Shall_return_rhs_with_first_index);
 	tcase_add_test(tc_core, test_rope_make_leaf_node);
 	tcase_add_test(tc_core, test_rope_make_leaf_node_from_text);
