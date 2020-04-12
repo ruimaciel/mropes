@@ -45,6 +45,28 @@ START_TEST(test_rope_prepend_rope)
 }
 END_TEST
 
+START_TEST(test_rope_When_prepend_rope_Then_length_is_equal_to_the_sum_of_both_ropes)
+{
+	/* Given */
+	mrope_t rope_lhs;
+	mrope_init(&rope_lhs);
+	mrope_append_text(&rope_lhs, "foo");
+	const size_t lhs_size = mrope_length(&rope_lhs);
+
+	mrope_t rope_rhs;
+	mrope_init(&rope_rhs);
+	mrope_append_text(&rope_rhs, "bar");
+	const size_t rhs_size = mrope_length(&rope_rhs);
+
+	/* When */
+	mrope_prepend_rope(&rope_lhs, &rope_rhs);
+
+	/* Then */
+	size_t size = mrope_length(&rope_lhs);
+	ck_assert_int_eq(size, lhs_size+rhs_size);
+}
+END_TEST
+
 
 START_TEST(test_rope_append_text)
 {
@@ -230,6 +252,7 @@ Suite * mropes_suite(void)
 
 	tcase_add_test(tc_core, test_rope_init);
 	tcase_add_test(tc_core, test_rope_when_prepend_rope_then_lhs_is_null);
+	tcase_add_test(tc_core, test_rope_When_prepend_rope_Then_length_is_equal_to_the_sum_of_both_ropes);
 	tcase_add_test(tc_core, test_rope_prepend_rope);
 	tcase_add_test(tc_core, test_rope_append_text);
 	tcase_add_test(tc_core, test_rope_append_rope);
