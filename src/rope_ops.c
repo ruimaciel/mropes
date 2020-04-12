@@ -47,7 +47,7 @@ struct mrope_branch_node *mrope_make_branch_node(struct mrope_node *lhs, struct 
 	return node;
 }
 
-struct mrope_leaf_node * mrope_make_leaf_node()
+struct mrope_leaf_node * mrope_make_leaf_node(void)
 {
 	struct mrope_leaf_node * node = NULL;
 

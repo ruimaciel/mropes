@@ -7,7 +7,7 @@ void mrope_init_branch_node(struct mrope_branch_node *node, struct mrope_node *l
 void mrope_init_leaf_node(struct mrope_leaf_node * node, char * text, const size_t length);
 
 struct mrope_branch_node * mrope_make_branch_node(struct mrope_node *lhs, struct mrope_node *rhs);
-struct mrope_leaf_node * mrope_make_leaf_node();
+struct mrope_leaf_node * mrope_make_leaf_node(void);
 
 enum mrope_error_code mrope_free_branch_node(struct mrope_branch_node * node);
 enum mrope_error_code mrope_free_leaf_node(struct mrope_leaf_node * node);
