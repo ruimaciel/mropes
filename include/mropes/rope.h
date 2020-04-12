@@ -56,5 +56,6 @@ mreturn_t mrope_delete(mrope_t *rope_inout, const size_t index, const size_t len
 
 size_t mrope_length(const mrope_t *rope_in);
 char mrope_index(const mrope_t *rope_in, const size_t index);
+mreturn_t mrope_index_range(const mrope_t *rope_in, char* buffer, const size_t start, const  size_t end);
 
 #endif /* MROPES_H */

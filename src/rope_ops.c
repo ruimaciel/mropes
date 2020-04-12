@@ -197,6 +197,45 @@ mreturn_t mrope_clone_node(struct mrope_node *original, struct mrope_node *clone
 	}
 }
 
+
+mreturn_t _mrope_index_node_range(struct mrope_node *node, char **buffer, size_t start, char *end)
+{
+	assert(node != NULL);
+
+	mreturn_t error;
+
+	while(*buffer != end)
+	{
+
+		char* old_buffer_ptr = *buffer;
+
+		switch(node->type)
+		{
+		case MROPE_NODE_BRANCH:
+		{
+			error=mrope_index_branch_node_range( (struct mrope_branch_node *)node, buffer,  start, end);
+			break;
+		}
+
+		case MROPE_NODE_LEAF:
+		{
+			error=mrope_index_leaf_node_range( (struct mrope_leaf_node *)node, buffer, start, end);
+			break;
+		}
+
+		default:
+			error=MROPE_OUT_OF_RANGE;
+		}
+
+		if(*buffer == old_buffer_ptr)
+			break;
+
+		start += *buffer - old_buffer_ptr;
+	}
+
+	return MROPE_OK;
+}
+
 char mrope_index_node(struct mrope_node *node, const size_t index)
 {
 	assert(node != NULL);
@@ -218,6 +257,21 @@ char mrope_index_node(struct mrope_node *node, const size_t index)
 	}
 }
 
+mreturn_t mrope_index_leaf_node_range(struct mrope_leaf_node *leaf_node,char** buffer, size_t index, char *end)
+{
+	assert(leaf_node != NULL);
+	assert(leaf_node->text != NULL);
+
+	if(index >= leaf_node->node.weight)
+		return MROPE_OUT_OF_RANGE;
+
+	**buffer = leaf_node->text[index];
+
+	(*buffer)++;
+
+	return MROPE_OK;
+}
+
 char mrope_index_leaf_node(struct mrope_leaf_node *leaf_node, const size_t index)
 {
 	assert(leaf_node != NULL);
@@ -228,6 +282,33 @@ char mrope_index_leaf_node(struct mrope_leaf_node *leaf_node, const size_t index
 	}
 
 	return leaf_node->text[index];
+}
+
+mreturn_t mrope_index_branch_node_range(struct mrope_branch_node *branch_node, char **buffer, size_t index, char *end)
+{
+	size_t lhs_weight = 0;
+
+	assert(branch_node != NULL);
+
+	if(branch_node->left != NULL) {
+		lhs_weight = branch_node->left->weight;
+		if(lhs_weight > index) {
+			_mrope_index_node_range( (struct mrope_node *) branch_node->left, buffer , index, end);
+			return MROPE_OK;
+		}
+	}
+
+	if(branch_node->right == NULL) {
+		return MROPE_OUT_OF_RANGE;
+	}
+
+	if(index < lhs_weight + branch_node->right->weight) {
+		index -= lhs_weight;
+		_mrope_index_node_range( (struct mrope_node *) branch_node->right, buffer, index, end);
+		return MROPE_OK;
+	}
+
+	return MROPE_OK;
 }
 
 char mrope_index_branch_node(struct mrope_branch_node *branch_node, const size_t index)
@@ -248,7 +329,7 @@ char mrope_index_branch_node(struct mrope_branch_node *branch_node, const size_t
 	}
 
 	if(index < lhs_weight + branch_node->right->weight) {
-		return mrope_index_node( (struct mrope_node *) branch_node->right, lhs_weight + index);
+		return mrope_index_node( (struct mrope_node *) branch_node->right, index - lhs_weight);
 	}
 
 	return '\0';

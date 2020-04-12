@@ -387,7 +387,10 @@ size_t mrope_length(const mrope_t *rope_in)
 	return rope_in->root_node->weight;
 }
 
-
+const char* mrope_index_string(const mrope_t* rope_in,const size_t start_index,const size_t end_index)
+{
+	
+}
 char mrope_index(const mrope_t *rope_in, const size_t index)
 {
 	assert(rope_in != NULL);
@@ -467,4 +470,11 @@ mreturn_t mrope_delete(mrope_t *rope_inout, const size_t index, const size_t len
 	}
 
 	return MROPE_OK;
+}
+
+mreturn_t mrope_index_range(const mrope_t *rope_in, char* buffer, const size_t start, const  size_t end) {
+	if(mrope_length(rope_in)>end)
+		return MROPE_OUT_OF_RANGE;
+
+	return _mrope_index_node_range(rope_in->root_node, &buffer, start, buffer+end-start);
 }

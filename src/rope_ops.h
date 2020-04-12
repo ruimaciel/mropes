@@ -23,6 +23,10 @@ char mrope_index_branch_node(struct mrope_branch_node *branch_node, const size_t
 char mrope_index_leaf_node(struct mrope_leaf_node *leaf_node, const size_t index);
 char mrope_index_node(struct mrope_node *node, const size_t index);
 
+mreturn_t mrope_index_branch_node_range(struct mrope_branch_node *branch_node,char **buffer, size_t index, char *end);
+mreturn_t mrope_index_leaf_node_range(struct mrope_leaf_node *leaf_node,char **buffer, size_t index, char *end);
+mreturn_t _mrope_index_node_range(struct mrope_node *node, char **buffer, size_t start, char *end);
+
 mreturn_t mrope_make_leaf_node_from_text(struct mrope_leaf_node **leaf_node_out, char *text);
 
 size_t mrope_calculate_weights(struct mrope_node *node);
