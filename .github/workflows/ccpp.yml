@@ -19,8 +19,8 @@ jobs:
     - name: make
       run: make
       working-directory: ./build
-    - name: Generate DEB package with CPack
-      run: cpack -G DEB
+    - name: Generate packages with CPack
+      run: make package
       working-directory: ./build
     - uses: actions/upload-artifact@v1
       with:
