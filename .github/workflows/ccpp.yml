@@ -19,6 +19,9 @@ jobs:
     - name: make
       run: make
       working-directory: ./build
+    - name: Generate packages with CPack
+      run: make package
+      working-directory: ./build
     - uses: actions/upload-artifact@v1
       with:
         name: build
