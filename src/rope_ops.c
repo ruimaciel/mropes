@@ -125,6 +125,7 @@ mreturn_t mrope_clone_branch_node(struct mrope_branch_node *original, struct mro
 	struct mrope_node * rhs_node = NULL;
 
 	assert(original != NULL);
+	assert(clone != NULL);
 
 	if( (error = mrope_clone_node(original->left, lhs_node)) != MROPE_OK) {
 		return error;
