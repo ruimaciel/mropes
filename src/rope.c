@@ -295,6 +295,7 @@ mreturn_t mrope_split(const mrope_t *rope_in, const size_t index, mrope_t *rope_
 
 				duplicate_string[offset] = '\0';
 				if((lhs_string = realloc(duplicate_string, offset*sizeof(char))) == NULL)  {
+					free(duplicate_string);
 					error = MROPE_MALLOC_FAILED;
 					goto error_cleanup;
 				}
