@@ -143,7 +143,9 @@ mreturn_t mrope_clone_branch_node(struct mrope_branch_node *original, struct mro
 		return MROPE_MALLOC_FAILED;
 	}
 
-	clone = cloned_branch_node;
+	clone->node = cloned_branch_node->node;
+	clone->left = cloned_branch_node->left;
+	clone->right = cloned_branch_node->right;
 
 	return MROPE_OK;
 }
