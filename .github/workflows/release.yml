@@ -8,12 +8,36 @@ name: Upload Release Asset
 
 jobs:
   build:
+
+    runs-on: ubuntu-18.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: install dependencies
+      run: sudo apt-get install check
+    - name: create build directory
+      run: mkdir build
+    - name: configure
+      run: cmake .. -DENABLE_TESTS=OFF
+      working-directory: ./build
+    - name: make
+      run: make
+      working-directory: ./build
+    - name: Generate packages with CPack
+      run: make package
+      working-directory: ./build
+    - uses: actions/upload-artifact@v1
+      with:
+        name: release-build
+        path: build
+
+  release:
     name: Upload Release Asset
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v1
         with:
-          name: build
+          name: release-build
           path: build
       - name: Create Release
         id: create_release
