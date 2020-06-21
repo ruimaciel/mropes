@@ -125,12 +125,13 @@ mreturn_t mrope_clone_branch_node(struct mrope_branch_node *original, struct mro
 	struct mrope_node * rhs_node = NULL;
 
 	assert(original != NULL);
+	assert(clone != NULL);
 
-	if( (error = mrope_clone_node(original->left, lhs_node)) != MROPE_OK) {
+    if( (error = mrope_clone_node(original->left, &lhs_node)) != MROPE_OK) {
 		return error;
 	}
 
-	if( (error = mrope_clone_node(original->right, rhs_node)) != MROPE_OK) {
+    if( (error = mrope_clone_node(original->right, &rhs_node)) != MROPE_OK) {
 		mrope_free_node(lhs_node);
 		return error;
 	}
@@ -142,7 +143,9 @@ mreturn_t mrope_clone_branch_node(struct mrope_branch_node *original, struct mro
 		return MROPE_MALLOC_FAILED;
 	}
 
-	clone = cloned_branch_node;
+	clone->node = cloned_branch_node->node;
+	clone->left = cloned_branch_node->left;
+	clone->right = cloned_branch_node->right;
 
 	return MROPE_OK;
 }
@@ -175,7 +178,7 @@ mreturn_t mrope_clone_leaf_node(struct mrope_leaf_node *original, struct mrope_l
 	return MROPE_OK;
 }
 
-mreturn_t mrope_clone_node(struct mrope_node *original, struct mrope_node *clone)
+mreturn_t mrope_clone_node(struct mrope_node *original, struct mrope_node **clone)
 {
 	assert(original != NULL);
 	assert(clone != NULL);
@@ -184,12 +187,24 @@ mreturn_t mrope_clone_node(struct mrope_node *original, struct mrope_node *clone
 	{
 	case MROPE_NODE_BRANCH:
 	{
-		return mrope_clone_branch_node((struct mrope_branch_node *)original, (struct mrope_branch_node *)clone);
+        struct mrope_branch_node *node = mrope_make_branch_node(NULL, NULL);
+        if(node == NULL)
+        {
+            return MROPE_MALLOC_FAILED;
+        }
+        *clone = (struct mrope_node *)node;
+        return mrope_clone_branch_node((struct mrope_branch_node *)original, (struct mrope_branch_node *)*clone);
 	}
 
 	case MROPE_NODE_LEAF:
 	{
-		return mrope_clone_leaf_node((struct mrope_leaf_node *)original, (struct mrope_leaf_node *)clone);
+        struct mrope_leaf_node *node = mrope_make_leaf_node();
+        if(node == NULL)
+        {
+            return MROPE_MALLOC_FAILED;
+        }
+        *clone = (struct mrope_node *)node;
+        return mrope_clone_leaf_node((struct mrope_leaf_node *)original, (struct mrope_leaf_node *)*clone);
 	}
 
 	default:

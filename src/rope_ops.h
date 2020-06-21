@@ -17,7 +17,7 @@ mreturn_t mrope_split_leaf_node(struct mrope_leaf_node * original, const size_t 
 
 mreturn_t mrope_clone_branch_node(struct mrope_branch_node *original, struct mrope_branch_node *clone);
 mreturn_t mrope_clone_leaf_node(struct mrope_leaf_node *original, struct mrope_leaf_node *clone);
-mreturn_t mrope_clone_node(struct mrope_node *original, struct mrope_node *clone);
+mreturn_t mrope_clone_node(struct mrope_node *original, struct mrope_node **clone);
 
 char mrope_index_branch_node(struct mrope_branch_node *branch_node, const size_t index);
 char mrope_index_leaf_node(struct mrope_leaf_node *leaf_node, const size_t index);

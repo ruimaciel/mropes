@@ -76,6 +76,7 @@ START_TEST(test_rope_make_leaf_node_from_text_SHALL_own_text)
 
 	error = mrope_make_leaf_node_from_text(&leaf_node, text);
 
+	ck_assert_int_eq(error, MROPE_OK);
 	ck_assert_ptr_eq(leaf_node->text, text);
 }
 END_TEST
