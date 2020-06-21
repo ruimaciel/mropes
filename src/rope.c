@@ -403,22 +403,14 @@ mreturn_t mrope_clone(const mrope_t *rope_in, mrope_t * rope_out)
 	struct mrope_node * cloned_root_node = NULL;
 	mreturn_t error = MROPE_OK;
 
-	assert(rope_in != NULL);
-	assert(rope_out != NULL);
+    assert(rope_in != NULL);
+    assert(rope_out != NULL);
 
-	if(mrope_length(rope_in) == 0) {
-		mrope_init(rope_out);
-		return MROPE_OK;
-	}
-
-	cloned_root_node = (struct mrope_node *)malloc(sizeof (struct mrope_node));
-	if(cloned_root_node == NULL) {
-		return MROPE_MALLOC_FAILED;
-	}
-
-	if( (error = mrope_clone_node(rope_in->root_node, cloned_root_node)) != MROPE_OK) {
-		return error;
-	}
+    if(rope_in->root_node != NULL) {
+        if( (error = mrope_clone_node(rope_in->root_node, &cloned_root_node)) != MROPE_OK) {
+            return error;
+        }
+    }
 
 	rope_out->root_node = cloned_root_node;
 	return MROPE_OK;

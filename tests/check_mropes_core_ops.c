@@ -41,22 +41,6 @@ START_TEST(test_Given_null_lhs_and_nonnull_rhs_When_make_branch_node_Then_rhs_is
 }
 END_TEST
 
-START_TEST(test_Given_empty_branch_node_When_mrope_clone_branch_node_Then_cloned_branch_node_is_empty)
-{
-	/* Given */
-	struct mrope_branch_node *old_branch = mrope_make_branch_node(NULL, NULL);
-	struct mrope_branch_node *new_branch = NULL;
-
-	/* When */
-	mreturn_t error = MROPE_OK;
-	error = mrope_clone_branch_node(old_branch, new_branch);
-
-	/* Then */
-	ck_assert_int_eq(error, MROPE_OK);
-	ck_assert_int_eq(new_branch->node.type, old_branch->node.type);
-}
-END_TEST
-
 START_TEST(test_rope_make_leaf_node)
 {
 	struct mrope_leaf_node *node = mrope_make_leaf_node();
@@ -289,7 +273,6 @@ Suite * mropes_suite(void)
 	tcase_add_test(tc_core, test_mrope_split_leaf_node_Shall_return_rhs_with_index_length);
 	tcase_add_test(tc_core, test_mrope_split_leaf_node_Shall_return_rhs_with_first_index);
 	tcase_add_test(tc_core, test_rope_index_branch_node);
-	tcase_add_test(tc_core, test_Given_empty_branch_node_When_mrope_clone_branch_node_Then_cloned_branch_node_is_empty);
 	tcase_add_test(tc_core, test_rope_make_leaf_node);
 	tcase_add_test(tc_core, test_rope_make_leaf_node_from_text);
 	tcase_add_test(tc_core, test_rope_make_leaf_node_from_text_SHALL_own_text);
