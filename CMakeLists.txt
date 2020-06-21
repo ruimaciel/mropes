@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.1)
 
 project(mropes
-    VERSION 0.0.4.2
+    VERSION 0.0.5.0
     LANGUAGES C
     )
 
