@@ -9,6 +9,7 @@ set(mropes_SOURCES
     src/rope.c
     src/rope_ops.c
     src/rope_stack.c
+    src/version.h.in
     )
 
 set(mropes_INCLUDES
