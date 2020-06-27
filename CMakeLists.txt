@@ -42,6 +42,7 @@ set_target_properties(
     C_STANDARD 90
     C_STANDARD_REQUIRED ON
     C_EXTENSIONS OFF
+    SOVERSION 1
     PUBLIC_HEADER ${mropes_INCLUDES}
     )
 
