@@ -5,6 +5,8 @@ project(mropes
     LANGUAGES C
     )
 
+option(BUILD_SHARED_LIBS "Generate shared library" OFF)
+
 set(mropes_SOURCES
     src/rope.c
     src/rope_ops.c
@@ -23,7 +25,7 @@ set(mropes_HEADERS
 
 configure_file(src/version.h.in include/mropes/version.h)
 
-add_library(${PROJECT_NAME} SHARED
+add_library(${PROJECT_NAME}
     ${mropes_SOURCES}
     ${mropes_INCLUDES}
     ${mropes_HEADERS}
@@ -47,7 +49,8 @@ set_target_properties(
     )
 
 install(TARGETS ${PROJECT_NAME}
-    EXPORT ${PROJECT_NAME}
+    EXPORT mropes-target
+    ARCHIVE DESTINATION lib/${PROJECT_NAME}
     LIBRARY DESTINATION lib/${PROJECT_NAME}
     PUBLIC_HEADER DESTINATION include/${PROJECT_NAME}
     )
@@ -58,7 +61,7 @@ install(FILES
   )
 
 install(
-    EXPORT ${PROJECT_NAME}
+    EXPORT mropes-target
     DESTINATION lib/cmake/${PROJECT_NAME}
     )
 
