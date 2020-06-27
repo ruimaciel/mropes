@@ -29,16 +29,17 @@ jobs:
     - uses: actions/upload-artifact@v1
       with:
         name: release-build
-        path: build
+        path: ./build
 
   release:
     name: Upload Release Asset
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - uses: actions/download-artifact@v1
         with:
           name: release-build
-          path: build
+          path: ./build
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
