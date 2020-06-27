@@ -30,6 +30,7 @@ jobs:
   test:
     runs-on: ubuntu-18.04
     needs: build
+
     steps:
     - uses: actions/checkout@v1
     - uses: actions/download-artifact@v1
@@ -47,3 +48,25 @@ jobs:
     - name: make test
       run: make test
       working-directory: ./build
+
+  release DEB:
+    name: "Release Debian installer"
+    runs-on: ubuntu-18.04
+    needs: test
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        path: ./mropes-0.0.5.2
+    - name: install dependencies
+      run: sudo apt-get install debmake
+    - name: debmake
+      run: debmake
+      working-directory: ./mropes-0.0.5.2
+    - name: debuild
+      run: debuild
+      working-directory: ./mropes-0.0.5.2
+    - uses: actions/upload-artifact@v2
+      with:
+        name: release
+        path: *.deb
