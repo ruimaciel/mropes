@@ -55,18 +55,21 @@ jobs:
     needs: test
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        path: ./mropes-0.0.5.2
+    - uses: actions/checkout@v1
     - name: install dependencies
-      run: sudo apt-get install debmake
-    - name: debmake
-      run: debmake
-      working-directory: ./mropes-0.0.5.2
-    - name: debuild
-      run: debuild
-      working-directory: ./mropes-0.0.5.2
-    - uses: actions/upload-artifact@v2
+      run: sudo apt-get install check
+    - name: create build directory
+      run: mkdir build
+    - name: configure
+      run: cmake .. -DENABLE_TESTS=OFF -DBUILD_SHARED_LIBS=ON
+      working-directory: ./build
+    - name: make
+      run: make
+      working-directory: ./build
+    - name: Generate packages with CPack
+      run: make package
+      working-directory: ./build
+    - uses: actions/upload-artifact@v1
       with:
-        name: release
-        path: "./*.deb"
+        name: release-build
+        path: ./release
