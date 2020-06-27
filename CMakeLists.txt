@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.1)
 
 project(mropes
-    VERSION 0.0.5.0
+    VERSION 0.0.5.1
     LANGUAGES C
     )
 
@@ -9,6 +9,7 @@ set(mropes_SOURCES
     src/rope.c
     src/rope_ops.c
     src/rope_stack.c
+    src/version.h.in
     )
 
 set(mropes_INCLUDES
@@ -41,6 +42,7 @@ set_target_properties(
     C_STANDARD 90
     C_STANDARD_REQUIRED ON
     C_EXTENSIONS OFF
+    SOVERSION 1
     PUBLIC_HEADER ${mropes_INCLUDES}
     )
 
