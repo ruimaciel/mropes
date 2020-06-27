@@ -49,7 +49,7 @@ jobs:
       run: make test
       working-directory: ./build
 
-  release DEB:
+  release:
     name: "Release Debian installer"
     runs-on: ubuntu-18.04
     needs: test
