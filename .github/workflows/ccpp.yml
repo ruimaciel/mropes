@@ -8,42 +8,42 @@ jobs:
     runs-on: ubuntu-18.04
     
     steps:
-    - uses: actions/checkout@v1
-    - name: install dependencies
-      run: sudo apt-get install check
-    - name: create build directory
-      run: mkdir build
-    - name: configure
-      run: cmake .. -DENABLE_TESTS=OFF
-      working-directory: ./build
-    - name: make
-      run: make
-      working-directory: ./build
-    - name: Generate packages with CPack
-      run: make package
-      working-directory: ./build
-    - uses: actions/upload-artifact@v1
-      with:
-        name: build
-        path: build
+      - uses: actions/checkout@v1
+      - name: install dependencies
+        run: sudo apt-get install check
+      - name: create build directory
+        run: mkdir build
+      - name: configure
+        run: cmake .. -DENABLE_TESTS=OFF
+        working-directory: ./build
+      - name: make
+        run: make
+        working-directory: ./build
+      - name: Generate packages with CPack
+        run: make package
+        working-directory: ./build
+      - uses: actions/upload-artifact@v1
+        with:
+          name: build
+          path: build
 
   test:
     runs-on: ubuntu-18.04
     needs: build
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/download-artifact@v1
-      with:
-        name: build
-        path: build
-    - name: install dependencies
-      run: sudo apt-get install check
-    - name: configure
-      run: cmake .. -DENABLE_TESTS=ON
-      working-directory: ./build
-    - name: make
-      run: make
-      working-directory: ./build
-    - name: make test
-      run: make test
-      working-directory: ./build
+      - uses: actions/checkout@v1
+      - uses: actions/download-artifact@v1
+        with:
+          name: build
+          path: build
+      - name: install dependencies
+        run: sudo apt-get install check
+      - name: configure
+        run: cmake .. -DENABLE_TESTS=ON
+        working-directory: ./build
+      - name: make
+        run: make
+        working-directory: ./build
+      - name: make test
+        run: make test
+        working-directory: ./build
