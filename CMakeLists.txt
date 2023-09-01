@@ -35,10 +35,10 @@ target_include_directories(${PROJECT_NAME}
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
-)
+    )
 
-set_target_properties(
-    ${PROJECT_NAME} PROPERTIES
+set_target_properties(${PROJECT_NAME}
+    PROPERTIES
     C_STANDARD 90
     C_STANDARD_REQUIRED ON
     C_EXTENSIONS OFF
@@ -53,9 +53,9 @@ install(TARGETS ${PROJECT_NAME}
     )
 
 install(FILES
-  ${CMAKE_CURRENT_BINARY_DIR}/include/mropes/version.h
-  DESTINATION include/${PROJECT_NAME}
-  )
+    ${CMAKE_CURRENT_BINARY_DIR}/include/mropes/version.h
+    DESTINATION include/${PROJECT_NAME}
+    )
 
 install(
     EXPORT ${PROJECT_NAME}
