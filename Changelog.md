@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
+- Convert project to C99
 - Adopt .clang-format spec
 
 ## [1.0.0] 2023-06-05
