@@ -6,6 +6,8 @@ find_package(subunit REQUIRED)
 
 include_directories(${PROJECT_SOURCE_DIR})
 
+add_definitions(-D_GNU_SOURCE)  # allow access to strdup in tests
+
 set(mropes_tests_prefix "check_mropes_")
 
 file(GLOB mropes_test_files
