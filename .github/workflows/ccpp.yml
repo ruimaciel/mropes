@@ -10,15 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: install dependencies
-        run: sudo apt-get install check
-      - name: create build directory
-        run: mkdir build
-      - name: configure
-        run: cmake .. -DENABLE_TESTS=OFF
-        working-directory: ./build
-      - name: make
-        run: make
-        working-directory: ./build
+        run: sudo apt-get install -y cmake check
+      - name: configure cmake
+        run: cmake -DCMAKE_BUILD_TYPE:STRING=Debug -DENABLE_TESTS=OFF -B./build -G "Unix Makefiles"
+      - name: build with cmake
+        run: cmake --build  ./build --config Debug --target all
       - name: Generate packages with CPack
         run: make package
         working-directory: ./build
