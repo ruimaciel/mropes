@@ -1,6 +1,6 @@
 # M's ropes library 
 
-![Travis (.com) branch](https://img.shields.io/travis/com/ruimaciel/mropes/develop.svg)
+![GitHub actions: master branch](https://github.com/ruimaciel/mropes/actions/workflows/ccpp.yml/badge.svg?branch=master)
 ![License](https://img.shields.io/github/license/ruimaciel/mropes.svg)
 ![Language](https://img.shields.io/github/languages/top/ruimaciel/mropes.svg)
 ![Code size](https://img.shields.io/github/languages/code-size/ruimaciel/mropes.svg)

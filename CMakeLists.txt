@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 
 project(mropes
-    VERSION 1.0.0.0
+    VERSION 1.0.1.0
     LANGUAGES C
     )
 
@@ -35,11 +35,11 @@ target_include_directories(${PROJECT_NAME}
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
-)
+    )
 
-set_target_properties(
-    ${PROJECT_NAME} PROPERTIES
-    C_STANDARD 90
+set_target_properties(${PROJECT_NAME}
+    PROPERTIES
+    C_STANDARD 99
     C_STANDARD_REQUIRED ON
     C_EXTENSIONS OFF
     SOVERSION 1
@@ -53,9 +53,9 @@ install(TARGETS ${PROJECT_NAME}
     )
 
 install(FILES
-  ${CMAKE_CURRENT_BINARY_DIR}/include/mropes/version.h
-  DESTINATION include/${PROJECT_NAME}
-  )
+    ${CMAKE_CURRENT_BINARY_DIR}/include/mropes/version.h
+    DESTINATION include/${PROJECT_NAME}
+    )
 
 install(
     EXPORT ${PROJECT_NAME}
