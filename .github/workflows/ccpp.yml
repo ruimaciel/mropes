@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-22.04
     
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
       - name: install dependencies
         run: sudo apt-get install -y cmake check
       - name: configure cmake
@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-22.04
     needs: build
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v1
         with:
           name: build
