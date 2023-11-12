@@ -26,7 +26,7 @@ jobs:
     - name: Generate packages with CPack
       run: make package
       working-directory: ./build
-    - uses: actions/upload-artifact@v1
+    - uses: actions/upload-artifact@v3
       with:
         name: release-build
         path: ./build
