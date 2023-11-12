@@ -28,7 +28,7 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v1
+      - uses: actions/download-artifact@v3
         with:
           name: build
           path: build
